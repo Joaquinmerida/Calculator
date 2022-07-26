@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Calculator</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="screen">
+            <input type="text" id="display" placeholder="0">
+        </div>
+        <div class="calculator">
+            <div class="sideButtons centered">
+                <button class="operator" onclick="calc('+')" id="+">+</button>
+                <button class="operator" onclick="calc('-')" id="-">-</button>
+                <button class="operator" onclick="calc('*')" id="*">*</button>
+                <button class="operator" onclick="calc('/')" id="/">/</button>
+                <button class="operator" onclick="calc('(')" id="(">(</button>
+                <button class="operator" onclick="calc(')')" id=")">)</button>
+            </div>
+            <div class="underButtons centered">
+                <button class="clear" onclick="handleClear()">C</button>
+                <button class="del" onclick="handleDelete()">DEL</button>
+            </div>
+            <div class="buttons">
+                <button class="number" onclick="calc(7)">7</button>
+                <button class="number" onclick="calc(8)">8</button>
+                <button class="number" onclick="calc(9)">9</button>
+                <button class="number" onclick="calc(4)" id="4">4</button>
+                <button class="number" onclick="calc(5)" id="5">5</button>
+                <button class="number" onclick="calc(6)" id="6">6</button>
+                <button class="number" onclick="calc(1)" id="1">1</button>
+                <button class="number" onclick="calc(2)" id="2">2</button>
+                <button class="number" onclick="calc(3)" id="3">3</butzton>
+                <button class="number" onclick="calc('.')" id=".">.</button>
+                <button class="number half" onclick="calc(0)" id="0">0</button>
+                <button class="equal half" onclick="result()">=</button>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js" defer></script>
+</body>
+
+</html>
