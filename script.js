@@ -1,91 +1,133 @@
-const keyPress = document.querySelectorAll('button')
-const number = document.querySelectorAll('.number')
-const dot = document.getElementById('.')
-const value = '0'
-let display = document.getElementById("display")
+const display = document.querySelector("#display")
+const displayResult = document.querySelector("#displayResult")
+const displayTempResult = document.querySelector("#displayTempResult")
+const numberKey = document.querySelectorAll(".number")
+const operatorKey = document.querySelectorAll(".operator")
+const equal = document.querySelector(".equal")
+const clear = document.querySelector(".clear")
+const clearLastEl = document.querySelector(".del")
 
-let calc = (number) => {
-    display.value = display.value + number
-    if (display.value.endsWith('.')) {
-        disableDot()
+let displayFirstNum = ""
+let displaySecNum = ""
+let result = null;
+let lastOperation = ""
+let haveDot = false
+
+numberKey.forEach(number => {
+    number.addEventListener("click", (e) => {
+        if (e.target.innerText === "." && !haveDot) {
+            haveDot = true
+        } else if (e.target.innerText === "." && haveDot) {
+            return
+        }
+        displaySecNum += e.target.innerText
+        displayResult.innerText = displaySecNum
+    })
+})
+
+operatorKey.forEach(operation => {
+    operation.addEventListener("click", (e) => {
+        if (!displaySecNum) return
+        haveDot = false
+        const operationName = e.target.innerText;
+        if (displayFirstNum && displaySecNum && lastOperation) {
+            calculate()
+        } else {
+            result = parseFloat(displaySecNum)
+        }
+        clearVar(operationName)
+        lastOperation = operationName
+    })
+})
+
+function clearVar(operator = "") {
+    displayFirstNum += displaySecNum + "" + operator + ""
+    display.innerText = displayFirstNum
+    displayResult.innerText = ""
+    displaySecNum = ""
+    displayTempResult.innerText = result
+}
+
+function calculate() {
+    if (lastOperation === "*") {
+        result = parseFloat(result) * parseFloat(displaySecNum)
+    } else if (lastOperation === "+") {
+        result = parseFloat(result) + parseFloat(displaySecNum)
+    } else if (lastOperation === "-") {
+        result = parseFloat(result) - parseFloat(displaySecNum)
+    } else if (lastOperation === "/") {
+        result = parseFloat(result) / parseFloat(displaySecNum)
     }
-    if (display.value.includes('+') || display.value.includes('-') || display.value.includes('/') || display.value.includes('*')){
-        dot.removeAttribute('disabled', '')
-        if ( number == '.' || display.value.endsWith('.')){
-            disableDot()
-        }
+}
+
+equal.addEventListener("click", (e) => {
+    if (!displayFirstNum || !displaySecNum) return
+    haveDot = false;
+    calculate()
+    clearVar()
+    displayResult.innerText = result
+    displayTempResult.innerText = ""
+    displaySecNum = result
+    displayFirstNum = ""
+})
+
+clear.addEventListener("click", (e) => {
+    display.innerText = "0"
+    displayResult.innerText = "0"
+    displayTempResult.innerText = "0"
+    displayFirstNum = ""
+    displaySecNum = ""
+    result = ""
+})
+
+clearLastEl.addEventListener("click", (e) => {
+    displayResult.innerText = ""
+    displaySecNum = ""
+})
+
+window.addEventListener("keydown", (e) => {
+    if (
+        e.key === "0" ||
+        e.key === "1" ||
+        e.key === "2" ||
+        e.key === "3" ||
+        e.key === "4" ||
+        e.key === "5" ||
+        e.key === "6" ||
+        e.key === "7" ||
+        e.key === "8" ||
+        e.key === "9" ||
+        e.key === "."
+    ) {
+        clickedButton(e.key)
+    } else if (
+        e.key === "*" ||
+        e.key === "+" ||
+        e.key === "-" ||
+        e.key === "/"
+    ) {
+        clickedOperation(e.key)
+    } else if( e.key === "Enter" || e.key === "="){
+        clickEqual()
     }
-}
+})
 
-//INDEX OF OPERATOR Y BUSCAR EL IF ELSE AHI
-
-
-console.log(display.value)
-if (number == ".") {
-    console.log(number)
-
-}
-
-
-function disableDot() {
-    dot.setAttribute('disabled', '')
-}
-
-let result = () => {
-    if (display.value != '') {
-        try {
-            display.value = eval(display.value)
+function clickedButton(key) {
+    numberKey.forEach(number => {
+        if (number.innerText === key) {
+            number.click()
         }
-        catch (err) {
-            display.value = 'MATH ERROR'
+    })
+}
+
+function clickedOperation(key) {
+    operatorKey.forEach(operation => {
+        if (operation.innerText === key) {
+            operation.click()
         }
-        if (display.value == 'Infinity') {
-            display.value = 'Not a Number'
-        }
-    }
+    })
 }
 
-
-let handleClear = () => {
-    display.value = ""
-    dot.removeAttribute('disabled', '')
+function clickEqual(){
+    equal.click()
 }
-
-let handleDelete = () => {
-    display.value = display.value.slice(0, -1)
-}
-
-// function updateDisplay(number) {
-//     display.innerText = value
-//     if(value.length > 9){
-//         display.innerText = value.substring(0, 9)
-//     }
-// }
-
-
-
-
-// keyPress.forEach((key) => {
-//     key.addEventListener("click", function () {
-//         if (key.classList == 'number') {
-//             if (firstInput.length < 9) {
-//                 firstInput.push(parseInt(key.innerHTML))
-//                 console.log(firstInput)
-//                 updateDisplay(firstInput)
-//             } else {
-//                 console.log("pasado de numeros")
-//             }
-//         }
-//     })
-// })
-
-
-// number.forEach((number) => {
-//         number.addEventListener("click", function (e) {
-//             let currentString = e.target.innerText
-//             var lastChar = currentString[currentString.length - 1];
-//             console.log(lastChar, currentString)
-//             showDisplay(lastChar)
-//         })
-//     })
-

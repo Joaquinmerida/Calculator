@@ -8,37 +8,42 @@
     <link rel="stylesheet" href="./styles.css">
     <title>Calculator</title>
 </head>
+
 <body>
     <div class="wrapper">
         <div class="screen">
-            <input type="text" id="display" placeholder="0">
-        </div>
-        <div class="calculator">
-            <div class="sideButtons centered">
-                <button class="operator" onclick="calc('+')" id="+">+</button>
-                <button class="operator" onclick="calc('-')" id="-">-</button>
-                <button class="operator" onclick="calc('*')" id="*">*</button>
-                <button class="operator" onclick="calc('/')" id="/">/</button>
-                <button class="operator" onclick="calc('(')" id="(">(</button>
-                <button class="operator" onclick="calc(')')" id=")">)</button>
+            <div class="innerScreen">
+                <p id="display">0</p>
+                <p id="displayTempResult">0</p>
+                <p id="displayResult">0</p>
             </div>
-            <div class="underButtons centered">
-                <button class="clear" onclick="handleClear()">C</button>
-                <button class="del" onclick="handleDelete()">DEL</button>
+        </div>
+        <div class="button">
+            <div class="sideButtons centered">
+                <button class="operator" id="+">+</button>
+                <button class="operator" id="-">-</button>
+                <button class="operator" id="*">*</button>
+                <button class="operator" id="/">/</button>
+                <button class="operator" id="(">(</button>
+                <button class="operator" id=")">)</button>
             </div>
             <div class="buttons">
-                <button class="number" onclick="calc(7)">7</button>
-                <button class="number" onclick="calc(8)">8</button>
-                <button class="number" onclick="calc(9)">9</button>
-                <button class="number" onclick="calc(4)" id="4">4</button>
-                <button class="number" onclick="calc(5)" id="5">5</button>
-                <button class="number" onclick="calc(6)" id="6">6</button>
-                <button class="number" onclick="calc(1)" id="1">1</button>
-                <button class="number" onclick="calc(2)" id="2">2</button>
-                <button class="number" onclick="calc(3)" id="3">3</butzton>
-                <button class="number" onclick="calc('.')" id=".">.</button>
-                <button class="number half" onclick="calc(0)" id="0">0</button>
-                <button class="equal half" onclick="result()">=</button>
+                <button class="number">7</button>
+                <button class="number">8</button>
+                <button class="number">9</button>
+                <button class="number">6</button>
+                <button class="number">2</button>
+                <button class="number">3</button>
+                <button class="number">4</button>
+                <button class="number">5</button>
+                <button class="number">1</button>
+                <button class="number " id="0">0</button>
+                <button class="equal half">=</button>
+            </div>
+            <div class="underButtons centered">
+                <button class="clear" >C</button>
+                <button class="del" >DEL</button>
+                <button class="number">.</button>
             </div>
         </div>
     </div>
