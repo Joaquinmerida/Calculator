@@ -19,6 +19,9 @@ numberKey.forEach(number => {
             haveDot = true
         } else if (e.target.innerText === "." && haveDot) {
             return
+        } 
+        if( (displaySecNum === "0" || displayFirstNum === "0") && e.target.innerText === "0"){
+            return
         }
         displaySecNum += e.target.innerText
         displayResult.innerText = displaySecNum
@@ -65,7 +68,8 @@ equal.addEventListener("click", (e) => {
     haveDot = false;
     calculate()
     clearVar()
-    displayResult.innerText = result
+    displayResult.innerText = result.toFixed(6)
+    console.log(typeof(result))
     displayTempResult.innerText = ""
     displaySecNum = result
     displayFirstNum = ""
