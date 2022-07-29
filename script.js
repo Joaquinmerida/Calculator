@@ -68,8 +68,8 @@ equal.addEventListener("click", (e) => {
     haveDot = false;
     calculate()
     clearVar()
-    displayResult.innerText = result.toFixed(6)
-    console.log(typeof(result))
+    display.innerText = +result.toFixed(6)
+    displayResult.innerText = +result.toFixed(6)
     displayTempResult.innerText = ""
     displaySecNum = result
     displayFirstNum = ""
@@ -111,7 +111,7 @@ window.addEventListener("keydown", (e) => {
         e.key === "/"
     ) {
         clickedOperation(e.key)
-    } else if( e.key === "Enter" || e.key === "="){
+    } else if( e.key === "="){
         clickEqual()
     }
 })
